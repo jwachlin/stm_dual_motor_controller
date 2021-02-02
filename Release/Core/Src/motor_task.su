@@ -1,0 +1,17 @@
+motor_task.c:112:14:vMotorTelemetryTimerCallback	56	static
+motor_task.c:47:9:drive_motor	0	static
+motor_task.c:473:7:set_motor_position.part.1	24	static
+motor_task.c:488:8:get_motor_position.part.2	0	static
+motor_task.c:233:14:vControlTimerCallback	144	static
+motor_task.c:324:7:motor_task_init	48	static
+motor_task.c:447:7:motor_task	0	static
+motor_task.c:458:7:set_control_mode	0	static
+motor_task.c:473:7:set_motor_position	0	static
+motor_task.c:488:8:get_motor_position	0	static
+motor_task.c:504:7:set_motor_speed	0	static
+motor_task.c:519:7:set_motor_duty	0	static
+motor_task.c:542:7:set_control_params_kp_min_max	0	static
+motor_task.c:584:7:set_control_params_ki	0	static
+motor_task.c:614:7:set_control_params_int_max	0	static
+motor_task.c:644:7:set_control_params_int_min	0	static
+motor_task.c:673:7:set_motor_ticks_per_rev	0	static

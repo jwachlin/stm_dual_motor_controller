@@ -1,0 +1,6 @@
+canbus_task.c:28:6:canbus_task_init	16	static
+canbus_task.c:43:6:canbus_task	104	static
+canbus_task.c:249:10:get_device_index	0	static
+canbus_task.c:261:6:add_can_frame_to_rx_queue	32	static
+canbus_task.c:278:6:add_can_frame_to_rx_queue_from_isr	32	static
+canbus_task.c:295:6:add_can_frame_to_tx_queue	32	static

@@ -1,0 +1,2 @@
+adc_interface.c:15:6:adc_interface_init	8	static
+adc_interface.c:23:10:get_motor_current_ma	40	static

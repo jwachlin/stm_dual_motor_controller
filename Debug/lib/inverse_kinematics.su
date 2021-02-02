@@ -1,0 +1,4 @@
+inverse_kinematics.c:18:7:init_leg_precalcs	24	static
+inverse_kinematics.c:24:7:calculate_ik	40	static
+inverse_kinematics.c:30:7:calculate_fk	32	static
+inverse_kinematics.c:36:7:calculate_fk_and_jacobian	48	static

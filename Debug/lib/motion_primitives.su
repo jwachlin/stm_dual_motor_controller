@@ -1,0 +1,10 @@
+motion_primitives.c:18:7:motion_primitive_init	4	static
+motion_primitives.c:221:7:motion_primitive_time_sync	16	static
+motion_primitives.c:226:7:motion_primitive_set_index	16	static
+motion_primitives.c:235:7:motion_primitive_set_timing	24	static
+motion_primitives.c:247:7:motion_primitive_set_scaling	32	static
+motion_primitives.c:259:7:motion_primitive_get_position	64	static
+motion_primitives.c:316:7:motion_primitive_get_position_bezier_quadratic	64	static
+motion_primitives.c:383:7:motion_primitive_is_inverted	4	static
+motion_primitives.c:388:7:motion_primitive_set_keyframe	24	static
+motion_primitives.c:403:10:get_motion_primitive	4	static

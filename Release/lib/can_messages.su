@@ -1,0 +1,2 @@
+can_messages.c:10:7:unpack_can_message	4	static
+can_messages.c:18:7:pack_can_message	4	static

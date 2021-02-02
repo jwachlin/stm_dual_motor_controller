@@ -1,0 +1,2 @@
+encoder_interface.c:20:10:get_motor_encoder_ticks	24	static
+encoder_interface.c:65:7:set_motor_encoder_ticks	16	static

@@ -1,0 +1,7 @@
+canbus_task.c:29:7:HAL_CAN_RxFifo0MsgPendingCallback	64	static
+canbus_task.c:40:6:canbus_task_init	56	static
+canbus_task.c:74:6:canbus_task	216	static
+canbus_task.c:289:10:get_device_index	4	static
+canbus_task.c:301:6:add_can_frame_to_rx_queue	40	static
+canbus_task.c:318:6:add_can_frame_to_rx_queue_from_isr	40	static
+canbus_task.c:335:6:add_can_frame_to_tx_queue	40	static
