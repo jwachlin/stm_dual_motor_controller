@@ -166,6 +166,7 @@
 
  static void vPrimitivesCalculation(void)
   {
+	 static uint32_t prim_count = 0;
 	int32_t i;
 	// Only calculate if all primitive or current primitive
 	for(i=0; i < NUMBER_MOTORS; i++)
@@ -188,21 +189,27 @@
 		motion_primitive_get_position_bezier_quadratic(&cart_pos.x, &cart_pos.y);
 	}
 
-	/*canbus_frame_t frame;
-	can_message_id_t id_helper;
+	prim_count++;
 
-	id_helper.can_msg_type = CAN_MSG_TYPE_INFO;
-	id_helper.can_class = CAN_MSG_CLASS_INFO_TELEMETRY;
-	id_helper.can_device = get_device_index();
+	if(prim_count % 20 == 0)
+	{
+		// 200 Hz output
+		canbus_frame_t frame;
+		can_message_id_t id_helper;
 
-	id_helper.can_index = CAN_MSG_INDEX_INFO_PRIMITIVE_SETPOINT;
-	pack_can_message(&id_helper);
+		id_helper.can_msg_type = CAN_MSG_TYPE_INFO;
+		id_helper.can_class = CAN_MSG_CLASS_INFO_TELEMETRY;
+		id_helper.can_device = get_device_index();
 
-	frame.id = id_helper.raw_id;
-	frame.length = 8;
-	memcpy(&frame.data[0], &cart_pos.x, 4);
-	memcpy(&frame.data[4], &cart_pos.y, 4);
-	add_can_frame_to_tx_queue(frame);*/
+		id_helper.can_index = CAN_MSG_INDEX_INFO_PRIMITIVE_SETPOINT;
+		pack_can_message(&id_helper);
+
+		frame.id = id_helper.raw_id;
+		frame.length = 8;
+		memcpy(&frame.data[0], &cart_pos.x, 4);
+		memcpy(&frame.data[4], &cart_pos.y, 4);
+		add_can_frame_to_tx_queue(frame);
+	}
 
 	if(control_type[0] == PRIMITIVE)
 	{
@@ -250,7 +257,7 @@
 		}
 
 		motors[i].ticks_count = get_motor_encoder_ticks(i);
-		motors[i].current_mA = get_motor_current_ma(i); // TODO get current
+		motors[i].current_mA = get_motor_current_ma(i);
 
 		if(control_type[i] == POSITION || control_type[i] == PRIMITIVE)
 		{
@@ -299,7 +306,7 @@
 
 	count++;
 
-	if(count % 8000 == 0)
+	/*if(count % 8000 == 0)
 	{
 		static bool dir = true;
 
@@ -314,7 +321,7 @@
 			//motors[1].duty = -0.5;
 		}
 		dir = !dir;
-	}
+	}*/
  }
 
  void motor_task_init(void)
@@ -322,9 +329,9 @@
 	 motion_primitive_init();
 	 precalc_inverse_trig();
 
-	 motion_primitive_set_index(5);
-	 control_type[0] = PROPRIOCEPTIVE_PRIMITIVE; // TODO default position
-	 control_type[1] = PROPRIOCEPTIVE_PRIMITIVE;
+	 //motion_primitive_set_index(5);
+	 control_type[0] = POSITION; // TODO default position
+	 control_type[1] = POSITION;
 
 	 leg.thigh_length_m = 0.055;
 	 leg.calf_length_m = 0.065;
@@ -332,9 +339,9 @@
 
 	 ic_params.gain_current_per_torque = 15.0; // 1.5A stall at 0.196Nm torque
 	 ic_params.c_eff_x = -0.2;
-	 ic_params.k_eff_x = 8.0; // 2 lbs/ 1.5cm = ~600N/m
+	 ic_params.k_eff_x = 600.0; // 2 lbs/ 1.5cm = ~600N/m
 	 ic_params.c_eff_y = -0.2;
-	 ic_params.k_eff_y = 8.0;
+	 ic_params.k_eff_y = 600.0;
 	 ic_params.gear_ratio = 150.0;
 
 	 // position control params
@@ -381,9 +388,9 @@
 	 cur_params[0].cmd_max = 10000.0;
 	 cur_params[0].cmd_min = -10000.0;
 	 cur_params[0].speed_alpha = 0.98;
-	 cur_params[0].integral_max = 34000.0; // Accumulates difference of ticks at 4kHz, must be big
-	 cur_params[0].integral_min = -34000.0; // Accumulates difference of ticks at 4kHz, must be big
-	 cur_params[0].ki = (0.7 * cur_params[0].cmd_max) / cur_params[0].integral_max;
+	 cur_params[0].integral_max = 10000.0; // Accumulates difference of ticks at 4kHz, must be big
+	 cur_params[0].integral_min = -10000.0; // Accumulates difference of ticks at 4kHz, must be big
+	 cur_params[0].ki = (0.95 * cur_params[0].cmd_max) / cur_params[0].integral_max;
 
 	 cur_params[1].kp = cur_params[0].kp;
 	 cur_params[1].kd = cur_params[0].kd;
@@ -403,7 +410,7 @@
 
 	 motor_tele_timer_handle = xTimerCreate(
 	 		 "Tele",
-	 		 pdMS_TO_TICKS(50),
+	 		 pdMS_TO_TICKS(20),
 	 		 pdTRUE,
 	 		 NULL,
 	 		 vMotorTelemetryTimerCallback);

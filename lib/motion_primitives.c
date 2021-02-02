@@ -216,6 +216,78 @@
 	primitives[5].frames[5].t_part = 0.85; // Time not used
 	primitives[5].frames[5].x = 0.06;
 	primitives[5].frames[5].y = 0.08;
+
+	// Slow trot walk with quadratic Bezier curve, shifted nearer to hip, centered
+	// Triangular, 1Hz, roughly 3X longer on ground than in air, front slightly forward of hip
+	primitives[6].num_keyframes = 6;
+	primitives[6].tau = 2.0;
+	primitives[6].t_offset = 0.0;
+	primitives[6].invert = 0;
+	primitives[6].time_reverse = 0;
+	primitives[6].x_offset_m = 0;
+	primitives[6].y_offset_m = 0;
+	primitives[6].x_scale = 1.0;
+	primitives[6].y_scale = 1.0;
+
+	primitives[6].frames[0].t_part = 0.0;
+	primitives[6].frames[0].x = 0.095;
+	primitives[6].frames[0].y = 0.03;
+
+	primitives[6].frames[1].t_part = 0.375; // Time not used
+	primitives[6].frames[1].x = 0.105;
+	primitives[6].frames[1].y = 0.0;
+
+	primitives[6].frames[2].t_part = 0.75;
+	primitives[6].frames[2].x = 0.095;
+	primitives[6].frames[2].y = -0.03;
+
+	primitives[6].frames[3].t_part = 0.8; // Time not used
+	primitives[6].frames[3].x = 0.06;
+	primitives[6].frames[3].y = -0.045;
+
+	primitives[6].frames[4].t_part = 0.875;
+	primitives[6].frames[4].x = 0.05;
+	primitives[6].frames[4].y = 0.0;
+
+	primitives[6].frames[5].t_part = 0.9; // Time not used
+	primitives[6].frames[5].x = 0.06;
+	primitives[6].frames[5].y = 0.045;
+
+	// Fast trot walk, shifted to help impedance control, high step
+	// Mostly triangular, in air roughly same as on ground, rear slightly backward of hip
+	primitives[7].num_keyframes = 6;
+	primitives[7].tau = 2.0;
+	primitives[7].t_offset = 0.0;
+	primitives[7].invert = 0;
+	primitives[7].time_reverse = 0;
+	primitives[7].x_offset_m = 0;
+	primitives[7].y_offset_m = 0;
+	primitives[7].x_scale = 1.0;
+	primitives[7].y_scale = 1.0;
+
+	primitives[7].frames[0].t_part = 0.0;
+	primitives[7].frames[0].x = 0.095;
+	primitives[7].frames[0].y = 0.015;
+
+	primitives[7].frames[1].t_part = 0.25; // Time not used
+	primitives[7].frames[1].x = 0.105;
+	primitives[7].frames[1].y = 0.0;
+
+	primitives[7].frames[2].t_part = 0.5;
+	primitives[7].frames[2].x = 0.095;
+	primitives[7].frames[2].y = -0.015;
+
+	primitives[7].frames[3].t_part = 0.6; // Time not used
+	primitives[7].frames[3].x = 0.07;
+	primitives[7].frames[3].y = -0.03;
+
+	primitives[7].frames[4].t_part = 0.75;
+	primitives[7].frames[4].x = 0.06;
+	primitives[7].frames[4].y = 0.0;
+
+	primitives[7].frames[5].t_part = 0.85; // Time not used
+	primitives[7].frames[5].x = 0.07;
+	primitives[7].frames[5].y = 0.035;
  }
 
  void motion_primitive_time_sync(uint32_t external_time)
