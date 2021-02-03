@@ -30,7 +30,7 @@ lib/adc_interface.o: ../lib/adc_interface.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../lib/adc_interface.h ../Core/Inc/arm_math.h
+ ../lib/adc_interface.h ../lib/adc_interface.h ../Core/Inc/arm_math.h
 
 ../Core/Inc/main.h:
 
@@ -95,6 +95,8 @@ lib/adc_interface.o: ../lib/adc_interface.c ../Core/Inc/main.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
+
+../lib/adc_interface.h:
 
 ../lib/adc_interface.h:
 

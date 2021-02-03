@@ -43,6 +43,7 @@
 
  static drive_motor(uint8_t index, float cmd)
 {
+	 motors[index].duty = (cmd / PWM_PERIOD);
 	 if(index == 0)
 	 {
 		 // IN1 and IN2, TIM2_CH3/4
@@ -159,6 +160,15 @@
  	frame.length = 8;
  	memcpy(&frame.data[0], &motors[0].current_ma_setpoint, 4);
  	memcpy(&frame.data[4], &motors[1].current_ma_setpoint, 4);
+ 	add_can_frame_to_tx_queue(frame);
+
+ 	id_helper.can_index = CAN_MSG_INDEX_INFO_DUTY;
+ 	pack_can_message(&id_helper);
+
+ 	frame.id = id_helper.raw_id;
+ 	frame.length = 8;
+ 	memcpy(&frame.data[0], &motors[0].duty, 4);
+ 	memcpy(&frame.data[4], &motors[1].duty, 4);
  	add_can_frame_to_tx_queue(frame);
 
  		// TODO other telemetry
@@ -306,22 +316,6 @@
 
 	count++;
 
-	/*if(count % 8000 == 0)
-	{
-		static bool dir = true;
-
-		if(dir)
-		{
-			motors[1].ticks_setpoint = 4200;
-			//motors[1].duty = 0.5;
-		}
-		else
-		{
-			motors[1].ticks_setpoint = 0;
-			//motors[1].duty = -0.5;
-		}
-		dir = !dir;
-	}*/
  }
 
  void motor_task_init(void)
@@ -329,7 +323,6 @@
 	 motion_primitive_init();
 	 precalc_inverse_trig();
 
-	 //motion_primitive_set_index(5);
 	 control_type[0] = POSITION; // TODO default position
 	 control_type[1] = POSITION;
 
@@ -338,10 +331,10 @@
 	 init_leg_precalcs(&leg);
 
 	 ic_params.gain_current_per_torque = 15.0; // 1.5A stall at 0.196Nm torque
-	 ic_params.c_eff_x = -0.2;
-	 ic_params.k_eff_x = 600.0; // 2 lbs/ 1.5cm = ~600N/m
-	 ic_params.c_eff_y = -0.2;
-	 ic_params.k_eff_y = 600.0;
+	 ic_params.c_eff_x = -120.0;
+	 ic_params.k_eff_x = 3500.0; // 2 lbs/ 1.5cm = ~600N/m
+	 ic_params.c_eff_y = -120.0;
+	 ic_params.k_eff_y = 2600.0;
 	 ic_params.gear_ratio = 150.0;
 
 	 // position control params
@@ -425,13 +418,16 @@
 	 TIM13->CR1 |= TIM_CR1_CEN;
 	 TIM14->CR1 |= TIM_CR1_CEN;
 	 TIM4->CR1 |= TIM_CR1_CEN; // Control loop timer
+	 TIM9->CR1 |= TIM_CR1_CEN; // ADC sample loop timer
 
 	 TIM2->CCER |= (TIM_CCER_CC1E | TIM_CCER_CC2E | TIM_CCER_CC3E | TIM_CCER_CC4E);
 	 TIM13->CCER |= (TIM_CCER_CC1E);
 	 TIM14->CCER |= (TIM_CCER_CC1E);
 	 TIM4->CCER |= (TIM_CCER_CC1E);
+	 TIM9->CCER |= (TIM_CCER_CC1E);
 
 	 TIM4->DIER |= (TIM_DIER_CC1IE);
+	 TIM9->DIER |= (TIM_DIER_CC1IE);
 
 	 // Enable encoder timers
 	 TIM1->CR1 |= TIM_CR1_CEN;

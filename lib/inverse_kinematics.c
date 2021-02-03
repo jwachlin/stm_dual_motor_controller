@@ -45,7 +45,8 @@
 	pos->y = leg->thigh_length_m * st + leg->calf_length_m * stk;
 
 	j->j_01 = -leg->calf_length_m * stk;
-	j->j_00 = -leg->thigh_length_m * ct + j->j_01;
+	j->j_00 = -leg->thigh_length_m * st + j->j_01;
 	j->j_11 = leg->calf_length_m * ctk;
 	j->j_10 = leg->thigh_length_m * ct + j->j_11;
+
  }

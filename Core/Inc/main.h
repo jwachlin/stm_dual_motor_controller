@@ -32,7 +32,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "adc_interface.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

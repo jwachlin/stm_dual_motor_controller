@@ -1,2 +1,3 @@
 adc_interface.c:18:6:adc_interface_init	8	static
-adc_interface.c:26:10:get_motor_current_ma	48	static
+adc_interface.c:26:6:sample_filter_adc	24	static
+adc_interface.c:41:10:get_motor_current_ma	24	static

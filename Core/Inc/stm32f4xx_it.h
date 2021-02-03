@@ -57,6 +57,7 @@ void ADC_IRQHandler(void);
 void CAN1_TX_IRQHandler(void);
 void CAN1_RX0_IRQHandler(void);
 void CAN1_RX1_IRQHandler(void);
+void TIM1_BRK_TIM9_IRQHandler(void);
 void TIM4_IRQHandler(void);
 void SPI2_IRQHandler(void);
 void TIM8_UP_TIM13_IRQHandler(void);

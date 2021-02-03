@@ -30,7 +30,7 @@ Core/Src/motor_task.o: ../Core/Src/motor_task.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Core/Inc/canbus_task.h ../Core/Inc/main.h \
+ ../lib/adc_interface.h ../Core/Inc/canbus_task.h ../Core/Inc/main.h \
  ../Core/Src/../../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../Core/Inc/FreeRTOSConfig.h \
  ../Core/Src/../../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \
@@ -115,6 +115,8 @@ Core/Src/motor_task.o: ../Core/Src/motor_task.c ../Core/Inc/main.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
+
+../lib/adc_interface.h:
 
 ../Core/Inc/canbus_task.h:
 
