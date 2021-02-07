@@ -41,7 +41,7 @@
  static impedance_control_params_t ic_params; // TODO different per motor?
  static leg_ik_t leg;
 
- static drive_motor(uint8_t index, float cmd)
+ static void drive_motor(uint8_t index, float cmd)
 {
 	 motors[index].duty = (cmd / PWM_PERIOD);
 	 if(index == 0)
@@ -189,6 +189,7 @@
 
 	pos_cartesian_t cart_pos;
 	pos_joint_space_t js_pos;
+	KEYFRAME_CONTROL ctrl_method = KEY_DO_NOT_CHANGE;
 
 	if(get_motion_primitive() < NUMBER_LINEAR_PRIMITIVES)
 	{
@@ -196,7 +197,21 @@
 	}
 	else
 	{
-		motion_primitive_get_position_bezier_quadratic(&cart_pos.x, &cart_pos.y);
+		motion_primitive_get_position_bezier_quadratic(&cart_pos.x, &cart_pos.y, &ctrl_method);
+
+		if(ctrl_method == KEY_POSITION)
+		{
+			for(i=0; i < NUMBER_MOTORS; i++)
+			{
+				control_type[i] = PRIMITIVE;
+			}
+		} else if(ctrl_method == KEY_VMC)
+		{
+			for(i=0; i < NUMBER_MOTORS; i++)
+			{
+				control_type[i] = PROPRIOCEPTIVE_PRIMITIVE;
+			}
+		}
 	}
 
 	prim_count++;

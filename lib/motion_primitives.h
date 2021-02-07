@@ -16,12 +16,19 @@
 #define NUMBER_BEZIER_PRIMITIVES	4
 #define NUMBER_PRIMITIVES			8
 
+typedef enum
+{
+	KEY_DO_NOT_CHANGE = 0,
+	KEY_POSITION = 1,
+	KEY_VMC = 2
+} KEYFRAME_CONTROL;
 
 typedef struct
 {
 	float x;
 	float y;
 	float t_part;
+	KEYFRAME_CONTROL ctrl;
 } keyframe_t;
 
 typedef struct
@@ -44,7 +51,7 @@ void motion_primitive_set_index(uint8_t index);
 void motion_primitive_set_timing(uint8_t index, float tau, float t_offset, uint8_t invert, uint8_t time_reverse);
 void motion_primitive_set_scaling(uint8_t index, float x_offset, float y_offset, float x_scale, float y_scale);
 void motion_primitive_get_position(float * x, float * y);
-void motion_primitive_get_position_bezier_quadratic(float * x, float * y);
+void motion_primitive_get_position_bezier_quadratic(float * x, float * y, KEYFRAME_CONTROL * ctrl_method);
 bool motion_primitive_is_inverted(void);
 void motion_primitive_set_keyframe(uint8_t index, uint8_t keyframe_index, float x, float y, float t_part);
 uint8_t get_motion_primitive(void);

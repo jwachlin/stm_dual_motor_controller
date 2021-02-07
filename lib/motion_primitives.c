@@ -8,6 +8,8 @@
  #include <stdint.h>
  #include <stdbool.h>
  #include <math.h>
+ #include "../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
+ #include "../Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
 
  #include "motion_primitives.h"
 
@@ -268,26 +270,32 @@
 	primitives[7].frames[0].t_part = 0.0;
 	primitives[7].frames[0].x = 0.095;
 	primitives[7].frames[0].y = 0.015;
+	primitives[7].frames[0].ctrl = KEY_VMC;
 
 	primitives[7].frames[1].t_part = 0.25; // Time not used
 	primitives[7].frames[1].x = 0.105;
 	primitives[7].frames[1].y = 0.0;
+	primitives[7].frames[1].ctrl = KEY_VMC;
 
 	primitives[7].frames[2].t_part = 0.5;
 	primitives[7].frames[2].x = 0.095;
 	primitives[7].frames[2].y = -0.015;
+	primitives[7].frames[2].ctrl = KEY_POSITION;
 
 	primitives[7].frames[3].t_part = 0.6; // Time not used
 	primitives[7].frames[3].x = 0.07;
 	primitives[7].frames[3].y = -0.03;
+	primitives[7].frames[3].ctrl = KEY_POSITION;
 
 	primitives[7].frames[4].t_part = 0.75;
 	primitives[7].frames[4].x = 0.06;
 	primitives[7].frames[4].y = 0.0;
+	primitives[7].frames[4].ctrl = KEY_POSITION;
 
 	primitives[7].frames[5].t_part = 0.85; // Time not used
 	primitives[7].frames[5].x = 0.07;
 	primitives[7].frames[5].y = 0.035;
+	primitives[7].frames[5].ctrl = KEY_POSITION;
  }
 
  void motion_primitive_time_sync(uint32_t external_time)
@@ -385,8 +393,11 @@
 	}
  }
 
- void motion_primitive_get_position_bezier_quadratic(float * x, float * y)
+ void motion_primitive_get_position_bezier_quadratic(float * x, float * y, KEYFRAME_CONTROL * ctrl_method)
  {
+	 // Default no change to control method
+	 *ctrl_method = KEY_DO_NOT_CHANGE;
+
 	if( primitives[primitive_index].num_keyframes % 2 != 0)
 	{
 		// Stay at first element, assume it is safe.
@@ -428,6 +439,9 @@
 
 			*x = x_cmd;
 			*y = y_cmd;
+
+			*ctrl_method = primitives[primitive_index].frames[2*i-1].ctrl;
+
 			return;
 		}
 		// Are we at the end, and after last keyframe
@@ -447,6 +461,9 @@
 
 			*x = x_cmd;
 			*y = y_cmd;
+
+			*ctrl_method = primitives[primitive_index].frames[2*i+1].ctrl;
+
 			return;
 		}
 	}
