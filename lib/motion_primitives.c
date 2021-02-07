@@ -162,26 +162,32 @@
 	primitives[4].frames[0].t_part = 0.0;
 	primitives[4].frames[0].x = 0.105;
 	primitives[4].frames[0].y = 0.01;
+	primitives[4].frames[0].ctrl = KEY_VMC;
 
 	primitives[4].frames[1].t_part = 0.375; // Time not used
 	primitives[4].frames[1].x = 0.115;
 	primitives[4].frames[1].y = -0.02;
+	primitives[4].frames[1].ctrl = KEY_VMC;
 
 	primitives[4].frames[2].t_part = 0.75;
 	primitives[4].frames[2].x = 0.105;
 	primitives[4].frames[2].y = -0.05;
+	primitives[4].frames[2].ctrl = KEY_POSITION;
 
 	primitives[4].frames[3].t_part = 0.8; // Time not used
 	primitives[4].frames[3].x = 0.07;
 	primitives[4].frames[3].y = -0.075;
+	primitives[4].frames[3].ctrl = KEY_POSITION;
 
 	primitives[4].frames[4].t_part = 0.875;
 	primitives[4].frames[4].x = 0.06;
 	primitives[4].frames[4].y = -0.02;
+	primitives[4].frames[4].ctrl = KEY_POSITION;
 
 	primitives[4].frames[5].t_part = 0.9; // Time not used
 	primitives[4].frames[5].x = 0.07;
 	primitives[4].frames[5].y = 0.035;
+	primitives[4].frames[5].ctrl = KEY_POSITION;
 
 	// Fast trot walk
 	// Mostly triangular, in air roughly same as on ground, rear slightly backward of hip
