@@ -13,7 +13,7 @@ main.c:640:13:MX_TIM9_Init	40	static
 main.c:681:13:MX_TIM13_Init	40	static
 main.c:727:13:MX_TIM14_Init	40	static
 main.c:773:13:MX_GPIO_Init	48	static
-main.c:823:6:start_canbus_task	56	static
-main.c:842:6:start_motor_task	16	static
-main.c:865:6:HAL_TIM_PeriodElapsedCallback	16	static
-main.c:882:6:Error_Handler	4	static
+main.c:835:6:start_canbus_task	56	static
+main.c:854:6:start_motor_task	16	static
+main.c:877:6:HAL_TIM_PeriodElapsedCallback	16	static
+main.c:894:6:Error_Handler	4	static

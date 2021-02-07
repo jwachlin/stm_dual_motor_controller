@@ -88,10 +88,16 @@ void enable_motor_task_from_isr(void);
 #define MISO_GPIO_Port GPIOB
 #define MOSI_Pin GPIO_PIN_15
 #define MOSI_GPIO_Port GPIOB
+#define INDEX3_Pin GPIO_PIN_14
+#define INDEX3_GPIO_Port GPIOD
 #define M1IN1_Pin GPIO_PIN_6
 #define M1IN1_GPIO_Port GPIOC
 #define M1IN2_Pin GPIO_PIN_7
 #define M1IN2_GPIO_Port GPIOC
+#define INDEX2_Pin GPIO_PIN_8
+#define INDEX2_GPIO_Port GPIOC
+#define INDEX1_Pin GPIO_PIN_9
+#define INDEX1_GPIO_Port GPIOC
 #define M2IN1_Pin GPIO_PIN_8
 #define M2IN1_GPIO_Port GPIOA
 #define M2IN2_Pin GPIO_PIN_9

@@ -39,10 +39,10 @@
 
 void canbus_task_init(CAN_HandleTypeDef can_handle)
 {
-	//this_device = ((ioport_get_pin_level(INDEX_0_GPIO) ? 0 : 1) << 0);
-	//this_device |= ((ioport_get_pin_level(INDEX_1_GPIO) ? 0 : 1) << 1);
-	//this_device |= ((ioport_get_pin_level(INDEX_2_GPIO) ? 0 : 1) << 2);
-	//this_device += 1; // Always offset by 1, the main controller is 0
+	this_device = (((HAL_GPIO_ReadPin(INDEX1_GPIO_Port, INDEX1_Pin) == GPIO_PIN_SET) ? 0 : 1) << 0);
+	this_device = (((HAL_GPIO_ReadPin(INDEX2_GPIO_Port, INDEX2_Pin) == GPIO_PIN_SET) ? 0 : 1) << 1);
+	this_device = (((HAL_GPIO_ReadPin(INDEX3_GPIO_Port, INDEX3_Pin) == GPIO_PIN_SET) ? 0 : 1) << 2);
+	this_device += 1; // Always offset by 1, the main controller is 0
 
 	canbus_queue_set = xQueueCreateSet( 2 * CAN_QUEUE_LENGTH );
 	canbus_rx_queue = xQueueCreate( CAN_QUEUE_LENGTH, sizeof(canbus_frame_t) );
